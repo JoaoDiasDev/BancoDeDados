@@ -21,6 +21,7 @@ db.empresas.aggregate([
     {$unwind: "$estado.cidades"},
     {$match: {"estado.cidades._id": "$cidadeId"}},
     {$addFields: {mesmaCidade: {$cmp: ["$estado.cidades._id", "$cidadeId"]} } },
+    {$match: {mesmaCidade: 0}}
 ]).pretty()
 
 db.estados.find()
